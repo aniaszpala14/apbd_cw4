@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection.PortableExecutable;
 
 namespace LegacyApp
 {
@@ -7,8 +6,8 @@ namespace LegacyApp
     {
         public bool AddUser(string firstName, string lastName, string email, DateTime dateOfBirth, int clientId)
         {
-            if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) || !CheckEmail(email) || (CountAge(dateOfBirth) < 21))
-            { return false; }
+            if(!isUserValid(firstName, lastName, email, dateOfBirth))
+            { return false;}
             
             var clientRepository = new ClientRepository();
             var client = clientRepository.GetById(clientId);
@@ -24,6 +23,12 @@ namespace LegacyApp
             return true;
         }
 
+        public bool isUserValid(string firstName, string lastName, String email, DateTime dateOfBirth)
+        {
+            if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) || !CheckEmail(email) || (CountAge(dateOfBirth) < 21))
+            { return false; }
+            return true;
+        }
         public int CountAge(DateTime dateOfBirth)
         {
             var now = DateTime.Now;
