@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 
+
 namespace LegacyApp
 {
     public class UserCreditService : IDisposable
